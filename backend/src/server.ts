@@ -3,6 +3,7 @@ import { connectDB } from './config/db';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import authRouter from './routes/authRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,6 +26,8 @@ app.get('/health', (req, res) => {
         uptime: process.uptime(),
     });
 });
+
+app.use("/api/v1/auth/", authRouter);
 
 const startServer = async () => {
     await connectDB();

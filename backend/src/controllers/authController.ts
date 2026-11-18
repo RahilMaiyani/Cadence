@@ -6,7 +6,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     try {
         const { name, email, password, timezone } = req.body;
 
-        const existingUser = await User.find({ email });
+        const existingUser = await User.findOne({ email });
         if (existingUser) {
             res.status(409).json({
                 success: false,
@@ -106,7 +106,6 @@ export const logout = (req: Request, res: Response): void => {
         message: "Logged out successfully",
     });
 };
-
 
 export const getMe = (req: Request, res: Response): void => {
     const user = req.user;
