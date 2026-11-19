@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { getHabitAnalytics, getHeatmap, getSummaryStats } from "../controllers/analyticsController";
+import { getDashboardData, getDateDetails, getHeatmap } from "../controllers/analyticsController";
 import { protect } from "../middleware/authMiddleware";
 
 const analyticsRouter = Router()
 
 analyticsRouter.use(protect);
 
-analyticsRouter.get("/heatmap", getHeatmap);
-analyticsRouter.get("/habit/:id", getHabitAnalytics);
-analyticsRouter.get("/summary", getSummaryStats);
+analyticsRouter.get('/dashboard', getDashboardData);
+analyticsRouter.get('/heatmap', getHeatmap);
+analyticsRouter.get('/date/:date', getDateDetails);
 
 export default analyticsRouter;
