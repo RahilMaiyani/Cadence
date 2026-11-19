@@ -13,3 +13,10 @@ export const getDaysDiff = (date1: string, date2: string): number => {
     const MS_PER_DAY = 1000 * 60 * 60 * 24;
     return Math.round(Math.abs((utc2 - utc1) / MS_PER_DAY));
 };
+
+export const getDaysAgo = (days: number, fromDateStr?: string): string => {
+    const base = fromDateStr ? new Date(fromDateStr) : new Date();
+    const date = new Date(Date.UTC(base.getUTCFullYear(), base.getUTCMonth(), base.getUTCDate()));
+    date.setUTCDate(date.getUTCDate() - days);
+    return date.toISOString().split('T')[0];
+};

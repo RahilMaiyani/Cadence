@@ -5,6 +5,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authRouter from './routes/authRoutes';
 import habitRouter from './routes/habitRoutes';
+import analyticsRouter from './routes/analyticsRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -30,6 +31,7 @@ app.get('/health', (req, res) => {
 
 app.use("/api/auth", authRouter);
 app.use("/api/habits", habitRouter);
+app.use("/api/analytics", analyticsRouter);
 
 const startServer = async () => {
     await connectDB();
