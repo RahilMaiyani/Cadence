@@ -87,7 +87,7 @@ export function CreateHabitModal({ isOpen, onClose, onCreate }: CreateHabitModal
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-slate-950/80 backdrop-blur-md"
+                        className="fixed inset-0 bg-slate-950/85 backdrop-blur-md"
                     />
 
                     {/* Modal Card */}
@@ -95,7 +95,7 @@ export function CreateHabitModal({ isOpen, onClose, onCreate }: CreateHabitModal
                         initial={{ opacity: 0, scale: 0.95, y: 15 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 15 }}
-                        className="w-full max-w-md max-h-[90dvh] overflow-y-auto bg-zinc-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-2xl relative z-10"
+                        className="w-full max-w-md max-h-[90dvh] overflow-y-auto bg-zinc-900/70 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-2xl relative z-10"
                     >
                         {/* Header */}
                         <div className="flex items-center justify-between mb-5">

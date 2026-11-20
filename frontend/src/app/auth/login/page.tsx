@@ -25,6 +25,7 @@ export default function Login() {
         try {
             await login(email, password);
             queryClient.invalidateQueries({ queryKey: ['dashboard'] });
+            queryClient.invalidateQueries({ queryKey: ['heatmap'] });
             router.push("/");
         }
         catch (err: any) {

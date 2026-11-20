@@ -93,8 +93,7 @@ export function DynamicHeatmap({ initialData }: DynamicHeatmapProps) {
     // 4. Generate calendar grid aligned by weeks (Sun -> Sat)
     const calendarWeeks = useMemo(() => {
         const today = new Date();
-        const daysArray: Array<{ date: string; count: number; isToday: boolean; dayOfWeek: number }> =
-            [];
+        const daysArray: Array<{ date: string; count: number; isToday: boolean; dayOfWeek: number }> = [];
 
         for (let i = range - 1; i >= 0; i--) {
             const d = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
@@ -155,10 +154,10 @@ export function DynamicHeatmap({ initialData }: DynamicHeatmapProps) {
             return 'bg-zinc-900/90 border border-zinc-800/80 hover:border-zinc-600';
         }
         if (count === 1) {
-            return 'bg-emerald-950/80 border border-emerald-800/50 hover:border-emerald-600';
+            return 'bg-emerald-900/80 border border-emerald-800/50 hover:border-emerald-600';
         }
         if (count === 2) {
-            return 'bg-emerald-700/70 border border-emerald-600/60 hover:border-emerald-400';
+            return 'bg-emerald-600/80 border border-emerald-500/60 hover:border-emerald-400';
         }
         return 'bg-emerald-500 border border-emerald-400 hover:brightness-110 shadow-[0_0_8px_rgba(16,185,129,0.3)]';
     };
