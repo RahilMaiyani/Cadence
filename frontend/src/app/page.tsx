@@ -153,7 +153,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-black opacity-92 text-slate-100 pb-20">
       <Navbar />
 
-      <main className="max-w-5xl mx-auto px-4 pt-8">
+      <main className="max-w-5xl mx-auto px-3 sm:px-4 pt-4 sm:pt-8">
         {/* 1. Daily Progress & Momentum Banner */}
         <DailyProgress
           totalHabits={summary.totalHabits}
@@ -164,15 +164,15 @@ export default function DashboardPage() {
         />
 
         {/* 2. Checklist Header & Actions */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-          <div>
-            <h1 className="text-xl font-bold text-white tracking-tight">Today&apos;s Habits</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Stay consistent. Every rep counts.</p>
+        <div className="flex items-center justify-between gap-3 mb-4 sm:mb-6">
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-xl font-bold text-white tracking-tight truncate">Today&apos;s Habits</h1>
+            <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5 truncate">Stay consistent. Every rep counts.</p>
           </div>
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="self-start sm:self-auto bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs px-4 py-2.5 rounded-xl transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-500/10 cursor-pointer"
+            className="shrink-0 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-500/10 cursor-pointer active:scale-95"
           >
             <Plus className="w-4 h-4" />
             <span>New Habit</span>
@@ -181,12 +181,12 @@ export default function DashboardPage() {
 
         {/* 3. Category Filter Tabs */}
         {habits.length > 0 && (
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-4 scrollbar-none">
+          <div className="-mx-3 px-3 sm:mx-0 sm:px-0 flex items-center gap-1.5 overflow-x-auto pb-3 mb-4 scrollbar-none touch-pan-x">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`text-[11px] font-mono px-3 py-1.5 rounded-lg border transition-all cursor-pointer whitespace-nowrap ${selectedCategory === cat
+                className={`text-[11px] font-mono px-3 py-1.5 rounded-lg border transition-all cursor-pointer whitespace-nowrap shrink-0 ${selectedCategory === cat
                   ? 'bg-slate-800 text-emerald-400 border-emerald-500/30'
                   : 'bg-slate-900/60 text-slate-400 border-slate-800 hover:text-white'
                   }`}
@@ -199,7 +199,7 @@ export default function DashboardPage() {
 
         {/* 4. Habits List */}
         {filteredHabits.length === 0 ? (
-          <div className="bg-slate-900/30 border border-slate-800/60 rounded-2xl p-12 text-center">
+          <div className="bg-slate-900/30 border border-slate-800/60 rounded-2xl p-8 sm:p-12 text-center">
             <div className="w-12 h-12 rounded-2xl bg-slate-800/60 border border-slate-700/60 flex items-center justify-center text-slate-400 mx-auto mb-3">
               <Sparkles className="w-5 h-5" />
             </div>
@@ -219,7 +219,7 @@ export default function DashboardPage() {
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-3.5">
             {filteredHabits.map((habit) => (
               <HabitCard
                 key={habit._id}
@@ -231,7 +231,7 @@ export default function DashboardPage() {
           </div>
         )}
 
-        <DynamicHeatmap />
+        <DynamicHeatmap initialData={data?.heatmap} />
 
       </main>
 

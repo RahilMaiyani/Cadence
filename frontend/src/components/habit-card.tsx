@@ -147,7 +147,7 @@ export function HabitCard({ habit, onToggle, isToggling }: HabitCardProps) {
 
                             {/* Note preview if attached */}
                             {habit.log?.note && !showNoteInput && (
-                                <span className="text-[11px] text-zinc-400 truncate max-w-[160px] italic">
+                                <span className="text-[11px] text-zinc-400 truncate max-w-40 italic">
                                     &ldquo;{habit.log.note}&rdquo;
                                 </span>
                             )}
@@ -188,7 +188,7 @@ export function HabitCard({ habit, onToggle, isToggling }: HabitCardProps) {
                             animate={{ scale: habit.isCompleted ? 1 : 0.7 }}
                             transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                         >
-                            <Check className={`w-4 h-4 ${habit.isCompleted ? 'stroke-[3]' : ''}`} />
+                            <Check className={`w-4 h-4 ${habit.isCompleted ? 'stroke-3' : ''}`} />
                         </motion.div>
                     </motion.button>
                 </div>
@@ -210,7 +210,7 @@ export function HabitCard({ habit, onToggle, isToggling }: HabitCardProps) {
                                 onChange={(e) => setNote(e.target.value)}
                                 onKeyDown={handleKeyDown}
                                 placeholder="Micro reflection... (Enter to save)"
-                                className="flex-1 bg-zinc-950/80 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-colors"
+                                className="flex-1 bg-zinc-950/80 border border-zinc-800 rounded-lg px-3 py-1.5 text-base sm:text-xs text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-colors"
                                 autoFocus
                             />
                             <button

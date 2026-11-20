@@ -179,12 +179,12 @@ export function DynamicHeatmap({ initialData }: DynamicHeatmapProps) {
     };
 
     const isYearView = range === 365;
-    const cellSizeClass = isYearView ? 'w-3 h-3 rounded-[2px]' : 'w-3.5 h-3.5 rounded-[3px]';
+    const cellSizeClass = isYearView ? 'w-3 h-3 rounded-xs' : 'w-3.5 h-3.5 rounded-[3px]';
     const gridGapClass = isYearView ? 'gap-1' : 'gap-1.5';
 
     return (
-        <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-sm mt-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+        <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-4 sm:p-5 backdrop-blur-sm mt-6 sm:mt-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-5">
                 <div>
                     <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4 text-emerald-400" />
@@ -193,7 +193,7 @@ export function DynamicHeatmap({ initialData }: DynamicHeatmapProps) {
                             ({totalRangeCheckIns} check-in{totalRangeCheckIns !== 1 ? 's' : ''})
                         </span>
                     </div>
-                    <p className="text-xs text-zinc-400 mt-0.5">
+                    <p className="text-[11px] sm:text-xs text-zinc-400 mt-0.5">
                         Click any active day to inspect completed habits and reflections.
                     </p>
                 </div>
@@ -220,7 +220,7 @@ export function DynamicHeatmap({ initialData }: DynamicHeatmapProps) {
             </div>
 
             {/* 2. Heatmap */}
-            <div className="overflow-x-auto pb-2 scrollbar-none">
+            <div className="overflow-x-auto pb-2 scrollbar-none touch-pan-x -mx-2 px-2 sm:mx-0 sm:px-0">
                 <div className={`flex ${gridGapClass} min-w-max`}>
                     {calendarWeeks.map((week, weekIdx) => (
                         <div key={weekIdx} className={`flex flex-col ${gridGapClass}`}>
@@ -259,10 +259,10 @@ export function DynamicHeatmap({ initialData }: DynamicHeatmapProps) {
                 <span>Recent activity</span>
                 <div className="flex items-center gap-1.5">
                     <span>Less</span>
-                    <span className="w-3 h-3 rounded-[2px] bg-zinc-900 border border-zinc-800" />
-                    <span className="w-3 h-3 rounded-[2px] bg-emerald-950/80 border border-emerald-800/50" />
-                    <span className="w-3 h-3 rounded-[2px] bg-emerald-700/70 border border-emerald-600/60" />
-                    <span className="w-3 h-3 rounded-[2px] bg-emerald-500 border border-emerald-400" />
+                    <span className="w-3 h-3 rounded-xs bg-zinc-900 border border-zinc-800" />
+                    <span className="w-3 h-3 rounded-xs bg-emerald-950/80 border border-emerald-800/50" />
+                    <span className="w-3 h-3 rounded-xs bg-emerald-700/70 border border-emerald-600/60" />
+                    <span className="w-3 h-3 rounded-xs bg-emerald-500 border border-emerald-400" />
                     <span>More</span>
                 </div>
             </div>

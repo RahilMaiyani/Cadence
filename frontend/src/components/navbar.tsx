@@ -21,14 +21,14 @@ export function Navbar() {
 
     return (
         <header className="border-b border-slate-800/80 bg-zinc-900/40 backdrop-blur-md sticky top-0 z-40">
-            <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div className="max-w-5xl mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between">
 
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-3 sm:gap-6">
                     <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                            <Flame className="w-5 h-5 fill-emerald-500/20" />
+                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                            <Flame className="w-4 h-4 sm:w-5 sm:h-5 fill-emerald-500/20" />
                         </div>
-                        <span className="text-lg font-bold tracking-tight text-white font-sans">Cadence</span>
+                        <span className="text-base sm:text-lg font-bold tracking-tight text-white font-sans">Cadence</span>
                     </div>
 
                     <div className="hidden sm:block h-4 w-px bg-slate-800" />
@@ -39,19 +39,18 @@ export function Navbar() {
                     </span>
                 </div>
 
-
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3">
                     {user && (
-                        <div className="flex items-center gap-2 text-xs text-slate-300 bg-slate-900/60 border border-slate-800/80 px-3 py-1.5 rounded-xl">
-                            <UserIcon className="w-3.5 h-3.5 text-slate-400" />
-                            <span className="font-medium text-slate-200">{user.name}</span>
+                        <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-slate-300 bg-slate-900/60 border border-slate-800/80 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl max-w-32.5 sm:max-w-none truncate">
+                            <UserIcon className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                            <span className="font-medium text-slate-200 truncate">{user.name}</span>
                         </div>
                     )}
 
                     <button
                         onClick={handleLogout}
                         title="Log out"
-                        className="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 hover:bg-slate-800 text-slate-400 hover:text-white transition-all flex items-center justify-center cursor-pointer"
+                        className="w-8 h-8 rounded-lg sm:rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 hover:bg-slate-800 text-slate-400 hover:text-white transition-all flex items-center justify-center cursor-pointer"
                     >
                         <LogOut className="w-4 h-4" />
                     </button>
