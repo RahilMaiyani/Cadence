@@ -20,7 +20,7 @@ export function Navbar() {
     }).format(new Date());
 
     return (
-        <header className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
+        <header className="border-b border-slate-800/80 bg-zinc-900/40 backdrop-blur-md sticky top-0 z-40">
             <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
 
                 <div className="flex items-center gap-6">

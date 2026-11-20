@@ -10,6 +10,7 @@ import { DailyProgress } from '@/components/daily-progress';
 import { HabitCard, HabitItem } from '@/components/habit-card';
 import { CreateHabitModal } from '@/components/create-habit-modal';
 import { Plus, Loader2, Sparkles } from 'lucide-react';
+import { DynamicHeatmap } from '@/components/dynamic-heatmap';
 
 interface DashboardResponse {
   success: boolean;
@@ -55,7 +56,6 @@ export default function DashboardPage() {
     enabled: !!user,
   });
 
-  // 3. Optimistic Toggle Mutation (Instant 0ms UI update)
   const toggleMutation = useMutation({
     mutationFn: async ({ habitId, note }: { habitId: string; note?: string }) => {
       const today = new Date().toISOString().split('T')[0];
@@ -150,7 +150,7 @@ export default function DashboardPage() {
 
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 pb-20">
+    <div className="min-h-screen bg-black opacity-92 text-slate-100 pb-20">
       <Navbar />
 
       <main className="max-w-5xl mx-auto px-4 pt-8">
@@ -166,7 +166,7 @@ export default function DashboardPage() {
         {/* 2. Checklist Header & Actions */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-xl font-bold text-white tracking-tight">Today's Habits</h1>
+            <h1 className="text-xl font-bold text-white tracking-tight">Today&apos;s Habits</h1>
             <p className="text-xs text-slate-400 mt-0.5">Stay consistent. Every rep counts.</p>
           </div>
 
@@ -230,6 +230,9 @@ export default function DashboardPage() {
             ))}
           </div>
         )}
+
+        <DynamicHeatmap />
+
       </main>
 
       {/* 5. Create Habit Modal */}

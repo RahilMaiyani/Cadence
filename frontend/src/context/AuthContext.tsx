@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     setUser(data.user);
                 }
             }
-            catch (err) {
+            catch {
                 setUser(null);
             }
             finally {

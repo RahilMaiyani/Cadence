@@ -44,36 +44,31 @@ const iconMap: Record<string, React.ElementType> = {
     check: Check,
 };
 
-const colorStyles: Record<string, { bg: string; text: string; border: string; glow: string }> = {
+const colorStyles: Record<string, { bg: string; text: string; border: string }> = {
     emerald: {
         bg: 'bg-emerald-500/10',
         text: 'text-emerald-400',
         border: 'border-emerald-500/20',
-        glow: 'shadow-emerald-500/20',
     },
     indigo: {
         bg: 'bg-indigo-500/10',
         text: 'text-indigo-400',
         border: 'border-indigo-500/20',
-        glow: 'shadow-indigo-500/20',
     },
     rose: {
         bg: 'bg-rose-500/10',
         text: 'text-rose-400',
         border: 'border-rose-500/20',
-        glow: 'shadow-rose-500/20',
     },
     amber: {
         bg: 'bg-amber-500/10',
         text: 'text-amber-400',
         border: 'border-amber-500/20',
-        glow: 'shadow-amber-500/20',
     },
     cyan: {
         bg: 'bg-cyan-500/10',
         text: 'text-cyan-400',
         border: 'border-cyan-500/20',
-        glow: 'shadow-cyan-500/20',
     },
 };
 
@@ -95,16 +90,25 @@ export function HabitCard({ habit, onToggle, isToggling }: HabitCardProps) {
         setShowNoteInput(false);
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleNoteSave();
+        } else if (e.key === 'Escape') {
+            setShowNoteInput(false);
+        }
+    };
+
     return (
         <motion.div
             layout
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
             className={`
-        bg-slate-900/50 border rounded-2xl p-4 transition-all duration-200 backdrop-blur-sm
+        group relative rounded-xl border p-4 backdrop-blur-sm transition-all duration-200
         ${habit.isCompleted
-                    ? 'border-slate-800 bg-slate-900/30'
-                    : 'border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/80'
+                    ? 'bg-zinc-900/20 border-zinc-800/50'
+                    : 'bg-zinc-900/40 border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/60'
                 }
       `}
         >
@@ -112,14 +116,16 @@ export function HabitCard({ habit, onToggle, isToggling }: HabitCardProps) {
                 {/* Left: Icon & Habit Information */}
                 <div className="flex items-center gap-3.5 min-w-0">
                     <div
-                        className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border ${color.bg} ${color.text} ${color.border}`}
+                        className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border transition-transform duration-200 group-hover:scale-105 ${color.bg} ${color.text} ${color.border}`}
                     >
-                        <IconComponent className="w-5 h-5" />
+                        <IconComponent className="w-4 h-4" />
                     </div>
 
                     <div className="min-w-0">
                         <h3
-                            className={`text-sm font-semibold tracking-tight truncate transition-all ${habit.isCompleted ? 'text-slate-500 line-through' : 'text-white'
+                            className={`text-sm font-medium tracking-tight truncate transition-all duration-150 ${habit.isCompleted
+                                ? 'text-zinc-500 line-through'
+                                : 'text-zinc-100 group-hover:text-white'
                                 }`}
                         >
                             {habit.title}
@@ -129,79 +135,87 @@ export function HabitCard({ habit, onToggle, isToggling }: HabitCardProps) {
                             {/* Streak Badge */}
                             <div
                                 className={`flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded-md border ${habit.currentStreak > 0
-                                    ? 'bg-amber-500/10 text-amber-400 border-amber-500/20 font-bold'
-                                    : 'bg-slate-800/60 text-slate-500 border-slate-800'
+                                    ? 'bg-amber-500/10 text-amber-400 border-amber-500/20 font-semibold'
+                                    : 'bg-zinc-800/60 text-zinc-500 border-zinc-800'
                                     }`}
                             >
-                                <Flame className={`w-3 h-3 ${habit.currentStreak > 0 ? 'fill-amber-400' : ''}`} />
+                                <Flame
+                                    className={`w-3 h-3 ${habit.currentStreak > 0 ? 'fill-amber-400 text-amber-400' : 'text-zinc-500'}`}
+                                />
                                 <span>{habit.currentStreak}d</span>
                             </div>
 
-                            {/* Note indicator if one exists */}
+                            {/* Note preview if attached */}
                             {habit.log?.note && !showNoteInput && (
-                                <span className="text-[11px] text-slate-400 truncate max-w-[160px] italic">
-                                    "{habit.log.note}"
+                                <span className="text-[11px] text-zinc-400 truncate max-w-[160px] italic">
+                                    &ldquo;{habit.log.note}&rdquo;
                                 </span>
                             )}
                         </div>
                     </div>
                 </div>
 
-                {/* Right: Actions (Note Button & Checkmark) */}
+                {/* Right: Actions */}
                 <div className="flex items-center gap-2 shrink-0">
-                    {/* Note Toggle Button */}
+                    {/* Note toggle button */}
                     <button
                         onClick={() => setShowNoteInput(!showNoteInput)}
-                        title="Add a reflection note"
+                        title="Add reflection note"
+                        aria-label="Add reflection note"
                         className={`w-8 h-8 rounded-lg flex items-center justify-center border transition-all cursor-pointer ${habit.log?.note
-                            ? 'bg-slate-800 border-slate-700 text-slate-300'
-                            : 'border-transparent text-slate-600 hover:text-slate-400 hover:bg-slate-800/50'
+                            ? 'bg-zinc-800 border-zinc-700 text-zinc-200'
+                            : 'border-transparent text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50'
                             }`}
                     >
                         <MessageSquare className="w-3.5 h-3.5" />
                     </button>
 
-                    {/* Animated Checkbox Button */}
                     <motion.button
                         whileTap={{ scale: 0.88 }}
                         onClick={handleToggle}
                         disabled={isToggling}
+                        aria-label={habit.isCompleted ? 'Mark incomplete' : 'Mark complete'}
                         className={`
-              w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-200 cursor-pointer
+              w-9 h-9 rounded-lg flex items-center justify-center border transition-all duration-200 cursor-pointer
               ${habit.isCompleted
-                                ? 'bg-emerald-500 border-emerald-400 text-slate-950 shadow-lg shadow-emerald-500/20'
-                                : 'bg-slate-950/60 border-slate-800 text-transparent hover:border-slate-600 hover:text-slate-600'
+                                ? 'bg-emerald-500 border-emerald-400 text-zinc-950 shadow-[0_0_15px_rgba(16,185,129,0.25)]'
+                                : 'bg-zinc-950/60 border-zinc-800 text-transparent hover:border-zinc-600 hover:text-zinc-600'
                             }
             `}
                     >
-                        <Check
-                            className={`w-5 h-5 transition-transform duration-200 ${habit.isCompleted ? 'scale-100 stroke-[3]' : 'scale-75'
-                                }`}
-                        />
+                        <motion.div
+                            initial={false}
+                            animate={{ scale: habit.isCompleted ? 1 : 0.7 }}
+                            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                        >
+                            <Check className={`w-4 h-4 ${habit.isCompleted ? 'stroke-[3]' : ''}`} />
+                        </motion.div>
                     </motion.button>
                 </div>
             </div>
 
-            {/* Expandable Micro-Note Input Drawer */}
             <AnimatePresence>
                 {showNoteInput && (
                     <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="overflow-hidden pt-3 mt-3 border-t border-slate-800/60"
+                        transition={{ duration: 0.15 }}
+                        className="overflow-hidden pt-3 mt-3 border-t border-zinc-800/60"
                     >
                         <div className="flex gap-2">
                             <input
                                 type="text"
                                 value={note}
                                 onChange={(e) => setNote(e.target.value)}
-                                placeholder="What did you accomplish today? (Optional)"
-                                className="flex-1 bg-slate-950/60 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500/50"
+                                onKeyDown={handleKeyDown}
+                                placeholder="Micro reflection... (Enter to save)"
+                                className="flex-1 bg-zinc-950/80 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-colors"
+                                autoFocus
                             />
                             <button
                                 onClick={handleNoteSave}
-                                className="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+                                className="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-medium px-3 py-1.5 rounded-lg border border-zinc-700/60 transition-colors cursor-pointer"
                             >
                                 Save
                             </button>

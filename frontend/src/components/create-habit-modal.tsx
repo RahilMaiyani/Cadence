@@ -38,24 +38,26 @@ const CATEGORIES = [
 const COLORS = [
     { id: 'emerald', label: 'Emerald', bg: 'bg-emerald-500' },
     { id: 'indigo', label: 'Indigo', bg: 'bg-indigo-400' },
-    { id: 'rose', label: 'Rose', bg: 'bg-red-500' },
+    { id: 'red', label: 'Red', bg: 'bg-red-500' },
     { id: 'blue', label: 'Blue', bg: 'bg-blue-500' },
-    { id: 'amber', label: 'Amber', bg: 'bg-amber-500' },
+    { id: 'orange', label: 'Orange', bg: 'bg-orange-500' },
     { id: 'cyan', label: 'Cyan', bg: 'bg-cyan-500' },
+    { id: 'yellow', label: 'Yellow', bg: 'bg-yellow-500' },
 ];
 
 const ICONS = [
     { id: 'dumbbell', icon: Dumbbell, label: 'Workout' },
+    { id: 'heart', icon: Heart, label: 'Health' },
+    { id: 'check', icon: Check, label: 'Generic' },
     { id: 'book-open', icon: BookOpen, label: 'Reading' },
+    { id: 'sun', icon: Sun, label: 'Mindset' },
     { id: 'droplet', icon: Droplet, label: 'Water' },
     { id: 'code', icon: Code, label: 'Coding' },
-    { id: 'heart', icon: Heart, label: 'Health' },
-    { id: 'sun', icon: Sun, label: 'Mindset' },
-    { id: 'check', icon: Check, label: 'Generic' },
 ];
 
 export function CreateHabitModal({ isOpen, onClose, onCreate }: CreateHabitModalProps) {
     const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [category, setCategory] = useState('PRODUCTIVITY');
     const [color, setColor] = useState('emerald');
     const [icon, setIcon] = useState('check');
@@ -93,7 +95,7 @@ export function CreateHabitModal({ isOpen, onClose, onCreate }: CreateHabitModal
                         initial={{ opacity: 0, scale: 0.95, y: 15 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 15 }}
-                        className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl relative z-10"
+                        className="w-full max-w-md bg-zinc-900/60 border border-slate-800 rounded-2xl p-6 shadow-2xl relative z-10"
                     >
                         {/* Header */}
                         <div className="flex items-center justify-between mb-5">
@@ -120,6 +122,24 @@ export function CreateHabitModal({ isOpen, onClose, onCreate }: CreateHabitModal
                                     placeholder="e.g. Read 20 Pages, Morning Gym"
                                     className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500/50"
                                 />
+                            </div>
+
+
+                            {/* Description Input */}
+                            <div>
+                                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+                                    Description
+                                </label>
+
+                                <textarea
+                                    // type="textarea"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    maxLength={500}
+                                    placeholder="e.g. Read any self help book for 30min or at least 10 pages in a day at any time"
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-xl max-h-66 min-h-20 px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500/50"
+                                >
+                                </textarea>
                             </div>
 
                             {/* Category Select */}

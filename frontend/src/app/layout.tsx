@@ -32,7 +32,7 @@ export default function RootLayout({
       className="dark"
     >
       <body
-        className={`${jakarta.variable} ${jetbrains.variable} font-sans bg-slate-950 text-slate-100 min-h-screen antialiased selection:bg-emerald-500/30 selection:text-emerald-300`}
+        className={`${jakarta.variable} ${jetbrains.variable} font-sans bg-green-500 text-slate-100 min-h-screen antialiased selection:bg-emerald-500/30 selection:text-emerald-300`}
       >
         <Providers>{children}</Providers>
       </body>
